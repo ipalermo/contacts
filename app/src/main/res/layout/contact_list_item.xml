@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:paddingTop="@dimen/list_item_vertical_margin"
+    android:paddingBottom="@dimen/list_item_vertical_margin">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_width="@dimen/contact_small_image_size"
+        android:layout_height="@dimen/contact_small_image_size"
+        android:scaleType="centerCrop"
+        android:id="@+id/contact_image"
+        android:layout_marginLeft="@dimen/abc_list_item_padding_horizontal_material"
+        android:layout_marginRight="@dimen/abc_list_item_padding_horizontal_material" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text="Contact Name"
+            android:id="@+id/contact_name" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            tools:text="Contact Phone"
+            android:id="@+id/contact_phone" />
+
+    </LinearLayout>
+
+</LinearLayout>
