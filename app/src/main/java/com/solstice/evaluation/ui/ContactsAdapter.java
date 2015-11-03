@@ -22,6 +22,12 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
 
     private ImageLoader mImageLoader;
 
+    static class ViewHolder {
+        TextView contactName;
+        TextView contactPhone;
+        NetworkImageView mNetworkImageView;
+    }
+
     public ContactsAdapter(Context context) {
         super(context, R.layout.contact_list_item);
 
@@ -30,19 +36,23 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        // reuse views
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.contact_list_item, parent, false);
+            // configure view holder
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.contactName = (TextView) convertView.findViewById(R.id.contact_name);
+            viewHolder.contactPhone = (TextView) convertView.findViewById(R.id.contact_phone);
+            viewHolder.mNetworkImageView = (NetworkImageView) convertView.findViewById(R.id.contact_image);
+            convertView.setTag(viewHolder);
         }
 
-        NetworkImageView mNetworkImageView = (NetworkImageView) convertView.findViewById(R.id.contact_image);
-        TextView contactName = (TextView) convertView.findViewById(R.id.contact_name);
-        TextView contactPhone = (TextView) convertView.findViewById(R.id.contact_phone);
-
+        // fill data
+        ViewHolder holder = (ViewHolder) convertView.getTag();
         Contact contact = getItem(position);
-
-        mNetworkImageView.setImageUrl(contact.getSmallImageUrl(), mImageLoader);
-        contactName.setText(contact.getName());
-        contactPhone.setText(contact.getPhones().get("home"));
+        holder.mNetworkImageView.setImageUrl(contact.getSmallImageUrl(), mImageLoader);
+        holder.contactName.setText(contact.getName());
+        holder.contactPhone.setText(contact.getPhones().get("home"));
 
         return convertView;
     }

@@ -23,6 +23,8 @@ import com.solstice.evaluation.R;
  */
 public class ContactDetailActivity extends AppCompatActivity {
 
+    private final int DEFAULT_ITEM_IDX = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +57,8 @@ public class ContactDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ContactDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ContactDetailFragment.ARG_ITEM_ID));
+            arguments.putInt(ContactDetailFragment.ARG_ITEM_INDEX,
+                    getIntent().getIntExtra(ContactDetailFragment.ARG_ITEM_INDEX, DEFAULT_ITEM_IDX));
             ContactDetailFragment fragment = new ContactDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

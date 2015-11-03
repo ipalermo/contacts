@@ -80,16 +80,16 @@ public class ContactListActivity extends AppCompatActivity
 
     /**
      * Callback method from {@link ContactListFragment.Callbacks}
-     * indicating that the item with the given ID was selected.
+     * indicating that the item index that was selected.
      */
     @Override
-    public void onItemSelected(String id) {
+    public void onItemSelected(int index) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ContactDetailFragment.ARG_ITEM_ID, id);
+            arguments.putInt(ContactDetailFragment.ARG_ITEM_INDEX, index);
             ContactDetailFragment fragment = new ContactDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -100,7 +100,7 @@ public class ContactListActivity extends AppCompatActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, ContactDetailActivity.class);
-            detailIntent.putExtra(ContactDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra(ContactDetailFragment.ARG_ITEM_INDEX, index);
             startActivity(detailIntent);
         }
     }

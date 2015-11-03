@@ -38,9 +38,12 @@ import java.util.Map;
 public class ContactListFragment extends ListFragment {
     private static final String TAG = ContactListFragment.class.getSimpleName();
 
-    private ContactsAdapter mAdapter;
-
     private static final String CONTACTS_URL = "https://solstice.applauncher.com/external/contacts.json";
+
+    /*
+     * Static adapter
+     */
+    static ContactsAdapter mAdapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -68,7 +71,7 @@ public class ContactListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        void onItemSelected(String id);
+        void onItemSelected(int id);
     }
 
     /**
@@ -77,7 +80,7 @@ public class ContactListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onItemSelected(int id) {
         }
     };
 
@@ -210,7 +213,7 @@ public class ContactListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(mAdapter.getItem(position).getEmployeeId().toString());
+        mCallbacks.onItemSelected(position);
     }
 
     @Override
