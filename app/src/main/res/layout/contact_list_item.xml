@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/list_item_vertical_margin"
     android:paddingBottom="@dimen/list_item_vertical_margin">
 
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:layout_width="@dimen/contact_small_image_size"
         android:layout_height="@dimen/contact_small_image_size"
         android:scaleType="centerCrop"

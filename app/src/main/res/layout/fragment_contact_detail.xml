@@ -1,24 +1,63 @@
-<!--<TextView -->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:id="@+id/contact_detail"-->
-    <!--style="?android:attr/textAppearanceLarge"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:padding="16dp"-->
-    <!--android:textIsSelectable="true"-->
-    <!--tools:context=".ContactDetailFragment" />-->
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="@dimen/contact_detail_linear_layout_top_margin"
     tools:context=".ContactDetailFragment">
 
     <android:include
         layout="@layout/contact_detail_record"
-        android:id="@+id/about" />
+        android:id="@+id/company" />
+
+    <LinearLayout
+        android:id="@+id/phoneContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
+    <View
+        android:id="@+id/phoneDivider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/div_size"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="72dp"
+        android:background="@color/divider" />
+
+    <android:include
+        layout="@layout/contact_detail_record"
+        android:id="@+id/address" />
+
+    <android:include
+        layout="@layout/contact_detail_record"
+        android:id="@+id/birthday" />
+
+    <android:include
+        layout="@layout/contact_detail_record"
+        android:id="@+id/email" />
+
+    <android:include
+        layout="@layout/contact_detail_record"
+        android:id="@+id/website" />
+
+    <FrameLayout
+        android:id="@+id/finalDivider"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@color/bg_backyard">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_gravity="top"
+            android:background="@drawable/card_shadow_bottom" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/card_shadow_top" />
+    </FrameLayout>
 
 </LinearLayout>

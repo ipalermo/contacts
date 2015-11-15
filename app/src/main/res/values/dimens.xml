@@ -6,7 +6,7 @@
     <dimen name="list_item_vertical_margin">5dp</dimen>
     <dimen name="contact_small_image_size">60dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
-
+    <dimen name="contact_detail_linear_layout_top_margin">20dp</dimen>
     <dimen name="div_size">1px</dimen>
 
 </resources>

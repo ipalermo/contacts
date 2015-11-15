@@ -14,14 +14,14 @@ import com.solstice.evaluation.util.BitmapLruCache;
 public class VolleySingleton {
     private static VolleySingleton mInstance;
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
+    //private ImageLoader mImageLoader;
     private static Context mCtx;
 
     private VolleySingleton(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();
 
-        mImageLoader = new ImageLoader(mRequestQueue, new BitmapLruCache(BitmapLruCache.getCacheSize(mCtx)));
+        //mImageLoader = new ImageLoader(mRequestQueue, new BitmapLruCache(BitmapLruCache.getCacheSize(mCtx)));
     }
 
     public static synchronized VolleySingleton getInstance(Context context) {
@@ -44,7 +44,7 @@ public class VolleySingleton {
         getRequestQueue().add(req);
     }
 
-    public ImageLoader getImageLoader() {
-        return mImageLoader;
-    }
+//    public ImageLoader getImageLoader() {
+//        return mImageLoader;
+//    }
 }

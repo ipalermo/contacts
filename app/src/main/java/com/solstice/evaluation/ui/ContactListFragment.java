@@ -2,6 +2,7 @@ package com.solstice.evaluation.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -41,15 +42,20 @@ public class ContactListFragment extends ListFragment {
     private static final String CONTACTS_URL = "https://solstice.applauncher.com/external/contacts.json";
 
     /*
-     * Static adapter
+     * Static adapter that holds the array of contacts
      */
-    static ContactsAdapter mAdapter;
+    static ContactsAdapter mContactListAdapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
+
+    /**
+     * Stores the scroll position of the ListView
+     */
+    private static Parcelable mListViewScrollPos = null;
 
     /**
      * The fragment's current callback object, which is notified of list item
@@ -95,20 +101,20 @@ public class ContactListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAdapter = new ContactsAdapter(getActivity());
-        setListAdapter(mAdapter);
+            mContactListAdapter = new ContactsAdapter(getActivity());
+            setListAdapter(mContactListAdapter);
 
-        fetchContacts();
+            fetchContacts();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //mAdapter = new ContactsAdapter(getActivity());
+        //mContactListAdapter = new ContactsAdapter(getActivity());
 
         //ListView listView = (ListView) getView().findViewById(R.id.list_contacts);
-        //listView.setAdapter(mAdapter);
+        //listView.setAdapter(mContactListAdapter);
 
         //fetchContacts();
     }
@@ -128,6 +134,11 @@ public class ContactListFragment extends ListFragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+
+        // Restore the ListView position
+        if (mListViewScrollPos != null) {
+            getListView().onRestoreInstanceState(mListViewScrollPos);
+        }
     }
 
     private void fetchContacts() {
@@ -140,7 +151,7 @@ public class ContactListFragment extends ListFragment {
                             Log.d(TAG, jsonArray.toString());
                             List<Contact> contacts = parseContacts(jsonArray);
 
-                            mAdapter.swapImageRecords(contacts);
+                            mContactListAdapter.swapContactRecords(contacts);
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(), "Unable to parse data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -223,6 +234,8 @@ public class ContactListFragment extends ListFragment {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
+        // Save the ListView position
+        mListViewScrollPos = getListView().onSaveInstanceState();
     }
 
     /**

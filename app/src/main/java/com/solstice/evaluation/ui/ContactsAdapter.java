@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.Glide;
 import com.solstice.evaluation.R;
 import com.solstice.evaluation.VolleySingleton;
 import com.solstice.evaluation.model.Contact;
@@ -20,18 +22,14 @@ import java.util.List;
  */
 public class ContactsAdapter extends ArrayAdapter<Contact> {
 
-    private ImageLoader mImageLoader;
-
     static class ViewHolder {
         TextView contactName;
         TextView contactPhone;
-        NetworkImageView mNetworkImageView;
+        ImageView mImageView;
     }
 
     public ContactsAdapter(Context context) {
         super(context, R.layout.contact_list_item);
-
-        mImageLoader = VolleySingleton.getInstance(context).getImageLoader();
     }
 
     @Override
@@ -43,27 +41,27 @@ public class ContactsAdapter extends ArrayAdapter<Contact> {
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.contactName = (TextView) convertView.findViewById(R.id.contact_name);
             viewHolder.contactPhone = (TextView) convertView.findViewById(R.id.contact_phone);
-            viewHolder.mNetworkImageView = (NetworkImageView) convertView.findViewById(R.id.contact_image);
+            viewHolder.mImageView = (ImageView) convertView.findViewById(R.id.contact_image);
             convertView.setTag(viewHolder);
         }
 
         // fill data
         ViewHolder holder = (ViewHolder) convertView.getTag();
         Contact contact = getItem(position);
-        holder.mNetworkImageView.setImageUrl(contact.getSmallImageUrl(), mImageLoader);
+        Glide.with(getContext()).load(contact.getSmallImageUrl()).centerCrop().into(holder.mImageView);
         holder.contactName.setText(contact.getName());
         holder.contactPhone.setText(contact.getPhones().get("home"));
 
         return convertView;
     }
 
-    public void swapImageRecords(List<Contact> contacts) {
-        clear();
+    public void swapContactRecords(List<Contact> contacts) {
+            clear();
 
-        for (Contact contact : contacts) {
-            add(contact);
-        }
+            for (Contact contact : contacts) {
+                add(contact);
+            }
 
-        notifyDataSetChanged();
+            notifyDataSetChanged();
     }
 }

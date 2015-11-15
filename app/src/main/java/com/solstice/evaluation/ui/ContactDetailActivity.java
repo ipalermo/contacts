@@ -10,7 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.solstice.evaluation.R;
+import com.solstice.evaluation.VolleySingleton;
 
 /**
  * An activity representing a single Contact detail screen. This
@@ -36,7 +38,7 @@ public class ContactDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Sorry, you can't set favorite status for now", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

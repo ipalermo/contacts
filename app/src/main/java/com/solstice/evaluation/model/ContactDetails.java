@@ -62,15 +62,15 @@ public class ContactDetails {
         this.address = address;
     }
 
-    private class Address {
+    public class Address {
 
         String street;
         String city;
         String state;
         String country;
         String zip;
-        Float latitude;
-        Float longitude;
+        double latitude;
+        double longitude;
 
         public String getCity() {
             return city;
@@ -112,19 +112,19 @@ public class ContactDetails {
             this.zip = zip;
         }
 
-        public Float getLatitude() {
+        public double getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(Float latitude) {
+        public void setLatitude(double latitude) {
             this.latitude = latitude;
         }
 
-        public Float getLongitude() {
+        public double getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(Float longitude) {
+        public void setLongitude(double longitude) {
             this.longitude = longitude;
         }
     }
